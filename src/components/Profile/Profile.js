@@ -35,10 +35,12 @@ class Profile extends React.Component {
 			//304 is returned if resp is coming from cache in browser
 			if (resp.status === 200 || resp.status === 304) {
 				this.props.toggleModal();
+				console.log(data)
 				this.props.loadUser({...this.props.user, ...data});
 			}
 		}).catch(console.log)
 	}
+
 	render() {
 		const { user } = this.props
 		const { name, age } = this.state

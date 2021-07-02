@@ -35,6 +35,7 @@ const initialState = {
     id: '',
     name: '',
     email: '',
+    age: '',
     entries: 0,
     joined: '',
     age: ''
@@ -49,6 +50,7 @@ class App extends Component {
 
   componentDidMount() {
     const token = window.sessionStorage.getItem('token')
+    console.log('componentDidMount')
     if (token) {
       fetch('http://localhost:3000/signin', {
         method: 'post',
@@ -76,7 +78,7 @@ class App extends Component {
           })
         }
       })
-      .catch(console.log)
+      .catch(err => console.log(err))
     }
   }
 
@@ -85,6 +87,7 @@ class App extends Component {
       id: data.id,
       name: data.name,
       email: data.email,
+      age: data.age,
       entries: data.entries,
       joined: data.joined
     }})
@@ -158,6 +161,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
+      window.sessionStorage.removeItem('token')
       return this.setState(initialState)
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
